@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@theme {
+    --color-glass: rgba(255, 255, 255, 0.7);
+    --color-glass-dark: rgba(15, 23, 42, 0.7);
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+    button {
+        cursor: pointer;
+    }
+}
+
+@layer components {
+    @keyframes marqueeScroll {
+        0% {
+            transform: translateX(0%);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    .glassmorphism {
+        background: var(--color-glass);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .hover-glare {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hover-glare::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+            45deg,
+            transparent,
+            rgba(255, 255, 255, 0.1),
+            transparent
+        );
+        transform: rotate(45deg);
+        transition: 0.5s;
+        opacity: 0;
+    }
+
+    .hover-glare:hover::after {
+        left: 100%;
+        opacity: 1;
+    }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
